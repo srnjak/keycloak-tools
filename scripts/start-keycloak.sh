@@ -22,6 +22,7 @@ file_client_role_mappings="$json_files_dir/client-roles.json"
 keycloak_docker_instance=
 keycloak_port=
 keycloak_version=
+dbvendor=
 username=
 password=
 client_dev_username=
@@ -45,6 +46,7 @@ docker run -d --name $keycloak_docker_instance \
     -p $keycloak_port:8080 \
     -e KEYCLOAK_USER=$username \
     -e KEYCLOAK_PASSWORD=$password \
+    -e DB_VENDOR=$dbvendor \
     jboss/keycloak:$keycloak_version
 
 # function validates, if url exists
