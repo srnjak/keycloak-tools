@@ -33,7 +33,8 @@ docker_network="testnet"
 # shellcheck source=/dev/null
 source "$conf_file"
 
-url="http://pingvinx:$keycloak_port/auth"
+host_name=$(echo $HOSTNAME | tr "[A-Z]" "[a-z]")
+url="http://$host_name:$keycloak_port/auth"
 
 if  docker ps -a | grep -q $keycloak_docker_instance ; then
   echo "Docker container \"$keycloak_docker_instance\" is already running."
@@ -59,7 +60,7 @@ function validate_url () {
 }
 
 retries=30
-echo -n "Waiting for Keycloak server "
+echo -n "Waiting for Keycloak server [$url] "
 until [ "$(validate_url "$url/")" ] || [ $retries -eq 0 ]; do
     echo -n "."
     ((retries--))
