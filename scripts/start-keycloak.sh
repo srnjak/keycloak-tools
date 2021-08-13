@@ -28,6 +28,7 @@ password=
 client_dev_username=
 client=
 client_dev=
+docker_network="testnet"
 
 # shellcheck source=/dev/null
 source "$conf_file"
@@ -41,7 +42,7 @@ fi
 
 echo -e "\033[1;34mStarting Keycloak instance.\033[0m"
 docker run -d --name $keycloak_docker_instance \
-    --network testnet \
+    --network $docker_network \
     --rm \
     -p $keycloak_port:8080 \
     -e KEYCLOAK_USER=$username \
